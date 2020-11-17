@@ -28,7 +28,7 @@
                 console.log('What was that?\nRefresh and try again.');
             }
 
-        function match(playerSelection, computerSelection) {
+        function playRound(playerSelection, computerSelection) {
             if (playerSelection.toUpperCase() === 'ROCK') {
                 if (computerSelection === 'ROCK') {
                     console.log('Tie - you both chose Rock!\nTry again.');
@@ -55,8 +55,24 @@
                     }
                 } 
             }
+        const computerSelection = computerPlay();
+        console.log(playRound(playerSelection, computerSelection));
+
+        function game() {
+            const playerSelection = window.prompt('Rock, Paper, or Scissors?');
+            if (playerSelection.toUpperCase() === 'ROCK') {
+                console.log('You chose Rock!');
+            } else if (playerSelection.toUpperCase() === 'PAPER') {
+                console.log('You chose Paper!');
+            } else if (playerSelection.toUpperCase() === 'SCISSORS') {
+                console.log('You chose Scissors!');
+            } else {
+                console.log('What was that?\nRefresh and try again.');
+            }
             const computerSelection = computerPlay();
-            console.log(match(playerSelection, computerSelection));
+            console.log(playRound(playerSelection, computerSelection));
+        }
+
 
     </script>
 </body>
