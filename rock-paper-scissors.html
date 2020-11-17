@@ -4,6 +4,59 @@
 </head>
 <body>
     <script>
-        
+        function computerPlay() {
+            let randNum = Math.floor(Math.random() * 3);
+            if (randNum === 0) {
+                console.log('Computer plays Rock.');
+                return 'ROCK';
+            } else if (randNum === 1) {
+                console.log('Computer plays Paper.');
+                return 'PAPER';
+            } else {
+                console.log('Computer plays Scissors.');
+                return 'SCISSORS';
+            }
+        }
+        const playerSelection = window.prompt('Rock, Paper, or Scissors?');
+            if (playerSelection.toUpperCase() === 'ROCK') {
+                console.log('You chose Rock!');
+            } else if (playerSelection.toUpperCase() === 'PAPER') {
+                console.log('You chose Paper!');
+            } else if (playerSelection.toUpperCase() === 'SCISSORS') {
+                console.log('You chose Scissors!');
+            } else {
+                console.log('What was that?\nRefresh and try again.');
+            }
+
+        function match(playerSelection, computerSelection) {
+            if (playerSelection.toUpperCase() === 'ROCK') {
+                if (computerSelection === 'ROCK') {
+                    console.log('Tie - you both chose Rock!\nTry again.');
+                    } else if (computerSelection === 'PAPER') {
+                        console.log('Too bad, you lose! Paper covers Rock.');
+                    } else {
+                        console.log('You win! Rock crushes Scissors!');
+                    }
+            } else if (playerSelection.toUpperCase() === 'PAPER') {
+                if (computerSelection === 'ROCK') {
+                    console.log('You win! Paper covers Rock!');
+                    } else if (computerSelection === 'PAPER') {
+                        console.log('Tie - you both chose Paper!\nTry again.');
+                    } else {
+                        console.log('Too bad, you lose! Scissors cut Paper.');
+                    } 
+            } else {
+                if (computerSelection === 'ROCK') {
+                    console.log('Too bad, you lose! Rock crushes Scissors.');
+                    } else if (computerSelection === 'PAPER') {
+                        console.log('You win! Scissors cut Paper!');
+                    } else {
+                        console.log('Tie - you both chose Scissors!\nTry again.');
+                    }
+                } 
+            }
+            const computerSelection = computerPlay();
+            console.log(match(playerSelection, computerSelection));
+
     </script>
 </body>
