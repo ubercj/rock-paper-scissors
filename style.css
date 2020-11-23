@@ -1,0 +1,49 @@
+html {
+    background-color: #d4d69c;
+}
+
+h1 {
+    font-size: 30px;
+    text-align: center;
+}
+
+h2, p {
+    font-size: 20px;
+    text-align: center;
+}
+
+.logItem {
+    color: black;
+} 
+
+.container {
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 15px;
+    background-color: #d4d69c;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-content: space-around;
+}
+
+.box {
+    border: 1px solid black;
+}
+
+.box:hover {
+    cursor: pointer;
+    border-color: rgb(0, 255, 255);
+}
+
+img {
+    width: 150px;
+    height: 150px;
+}
+
+.gameLog {
+    background-color: rgb(175, 169, 151);
+    width: 50%;
+    margin: auto;
+    white-space: pre-line;
+}

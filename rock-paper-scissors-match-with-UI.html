@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<head>
+    <title>Rock-Paper-Scissors</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Rock-Paper-Scissors</h1>
+    <p>Play against the computer. The first to 5 points wins!</p>
+    <p>Click on a picture to make your move.</p>
+    <div class="container">
+        <div class="box" id="rock">
+            <img src="https://images.homedepot-static.com/productImages/94af8836-0338-4802-914e-04cc71e562ad/svn/backyard-x-scapes-fake-rocks-hdd-rof-rocsb-64_1000.jpg">
+            <h2>Rock</h2>
+        </div>
+        <div class="box" id="paper">
+            <img src="https://rollandinc-production.s3.ca-central-1.amazonaws.com/app/uploads/2019/07/22145855/paper-digital-white.jpg">
+            <h2>Paper</h2>
+        </div>
+        <div class="box" id="scissors">
+            <img src="https://images.homedepot-static.com/productImages/92ea7123-2ec5-4f0e-93fd-0e1bed7c5b37/svn/wiss-scissors-w8blt-64_600.jpg">
+            <h2>Scissors</h2>
+        </div>
+    </div>
+    <div class="gameLog"></div>
+
+    <script>
+        let playerScore = 0;
+        let computerScore = 0;
+        let playerSelection;
+        let computerSelection;
+
+        const gameLog = document.querySelector('.gameLog');
+
+        function computerPlay() {
+            let randNum = Math.floor(Math.random() * 3);
+            if (randNum === 0) {
+                return 'ROCK';
+            } else if (randNum === 1) {
+                return 'PAPER';
+            } else {
+                return 'SCISSORS';
+            }
+        }
+
+        const boxes = Array.from(document.querySelectorAll('.box'));
+        boxes.forEach(box => box.addEventListener('click', clickChoice));
+
+        function clickChoice(e) {
+            gameLog.textContent = '';
+            if (this.id == 'rock') {
+                console.log('Rock');
+                playerSelection = 'ROCK';
+            } else if (this.id == 'paper') {
+                console.log('Paper');
+                playerSelection = 'PAPER';
+            } else {
+                console.log('Scissors');
+                playerSelection = 'SCISSORS';
+            }
+            playRound(playerSelection, computerSelection);
+        }
+
+        function playRound(playerSelection, computerSelection) {
+            computerSelection = computerPlay();
+            if (playerSelection == 'ROCK') {
+                const playerResult = document.createElement('p');
+                playerResult.classList.add('logItem');
+                playerResult.textContent = 'You chose Rock!';
+                gameLog.appendChild(playerResult);
+            } else if (playerSelection == 'PAPER') {
+                const playerResult = document.createElement('p');
+                playerResult.classList.add('logItem');
+                playerResult.textContent = 'You chose Paper!';
+                gameLog.appendChild(playerResult);
+            } else if (playerSelection == 'SCISSORS') {
+                const playerResult = document.createElement('p');
+                playerResult.classList.add('logItem');
+                playerResult.textContent = 'You chose Scissors!';
+                gameLog.appendChild(playerResult);
+            }
+            if (playerSelection.toUpperCase() === 'ROCK') {
+                if (computerSelection === 'ROCK') {
+                    const gameResult = document.createElement('p');
+                    gameResult.classList.add('logItem');
+                    gameResult.textContent = 'Computer plays Rock.\nTie - you both chose Rock!';
+                    gameLog.appendChild(gameResult);
+                    } else if (computerSelection === 'PAPER') {
+                        const gameResult = document.createElement('p');
+                        gameResult.classList.add('logItem');
+                        gameResult.textContent = 'Computer plays Paper.\nToo bad, you lose! Paper covers Rock.';
+                        gameLog.appendChild(gameResult);
+                        computerScore += 1;
+                    } else {
+                        const gameResult = document.createElement('p');
+                        gameResult.classList.add('logItem');
+                        gameResult.textContent = 'Computer plays Scissors.\nYou win! Rock crushes Scissors!';
+                        gameLog.appendChild(gameResult);
+                        playerScore += 1;
+                    }
+            } else if (playerSelection.toUpperCase() === 'PAPER') {
+                if (computerSelection === 'ROCK') {
+                    const gameResult = document.createElement('p');
+                    gameResult.classList.add('logItem');
+                    gameResult.textContent = 'Computer plays Rock.\nYou win! Paper covers Rock!';
+                    gameLog.appendChild(gameResult);
+                    playerScore += 1;
+                    } else if (computerSelection === 'PAPER') {
+                        const gameResult = document.createElement('p');
+                        gameResult.classList.add('logItem');
+                        gameResult.textContent = 'Computer plays Paper.\nTie - you both chose Paper!';
+                        gameLog.appendChild(gameResult);
+                    } else {
+                        const gameResult = document.createElement('p');
+                        gameResult.classList.add('logItem');
+                        gameResult.textContent = 'Computer plays Scissors.\nToo bad, you lose! Scissors cut Paper.';
+                        gameLog.appendChild(gameResult);
+                        computerScore += 1;
+                    } 
+            } else {
+                if (computerSelection === 'ROCK') {
+                    const gameResult = document.createElement('p');
+                    gameResult.classList.add('logItem');
+                    gameResult.textContent = 'Computer plays Rock.\nToo bad, you lose! Rock crushes Scissors.';
+                    gameLog.appendChild(gameResult);
+                    computerScore += 1;
+                    } else if (computerSelection === 'PAPER') {
+                        const gameResult = document.createElement('p');
+                        gameResult.classList.add('logItem');
+                        gameResult.textContent = 'Computer plays Paper.\nYou win! Scissors cut Paper!';
+                        gameLog.appendChild(gameResult);
+                        playerScore += 1;
+                    } else {
+                        const gameResult = document.createElement('p');
+                        gameResult.classList.add('logItem');
+                        gameResult.textContent = 'Computer plays Scissors.\nTie - you both chose Scissors!';
+                        gameLog.appendChild(gameResult);
+                    }
+                }
+            const gameScore = document.createElement('p');
+            gameScore.textContent = 'You: ' + playerScore + '.\nComputer: ' + computerScore + '.'
+            gameLog.appendChild(gameScore);
+            if (playerScore == 5 || computerScore == 5) {
+                if (playerScore > computerScore) {
+                    const matchResult = document.createElement('p');
+                    matchResult.textContent = 'Player wins the match!';
+                    gameLog.appendChild(matchResult);
+                } else if (playerScore == computerScore) {
+                    const matchResult = document.createElement('p');
+                    matchResult.textContent = 'It\'s a tie!';
+                    gameLog.appendChild(matchResult);
+                } else {
+                    const matchResult = document.createElement('p');
+                    matchResult.textContent = 'Computer wins!';
+                    gameLog.appendChild(matchResult);
+                }
+                computerScore = 0;
+                playerScore = 0;
+            }
+        }
+
+    </script>
+</body>
